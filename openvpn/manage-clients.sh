@@ -5,15 +5,17 @@
 # Script should be copied to easy-rsa directory
 # NOTE: openvpn configuration should contains ta.key configuration
 
+# Paths to main files
+TA_KEY=/etc/openvpn/ta.key
+CLIENT_CONF=/etc/openvpn/client.conf
+CA_CRT=/etc/openvpn/ca.crt
+KEYS_DIR=/etc/openvpn/easy-rsa/keys
+
 
 add_client(){
     NAME=$1
     [ -z "$NAME" ] && echo -n "Enter client name and press [ENTER]: "; read NAME || echo "Prepare settings for client $NAME"
     SETTINGS_PACK=${NAME}_openvpn
-    KEYS_DIR=keys
-    TA_KEY=./ta.key
-    CLIENT_CONF=client.conf
-    CA_CRT=../ca.crt
 
 	 # Read easy-rsa vars
     . ./vars
