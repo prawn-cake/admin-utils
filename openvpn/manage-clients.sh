@@ -1,6 +1,6 @@
 #!/bin/bash
 # Helper for adding new openvpn client
-# @version: 0.1
+# @version: 0.2
 #
 # Script should be copied to easy-rsa directory
 # NOTE: openvpn configuration should contains ta.key configuration
@@ -8,7 +8,7 @@
 # Paths to main files
 TA_KEY=/etc/openvpn/ta.key
 CLIENT_CONF=/etc/openvpn/client.conf
-CA_CRT=/etc/openvpn/ca.crt
+CA_CRT=/etc/openvpn/easy-rsa/keys/ca.crt
 KEYS_DIR=/etc/openvpn/easy-rsa/keys
 
 check_cfg_structure(){
