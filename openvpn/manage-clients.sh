@@ -12,13 +12,20 @@ CA_CRT=/etc/openvpn/ca.crt
 KEYS_DIR=/etc/openvpn/easy-rsa/keys
 
 check_cfg_structure(){
-	echo -n "Check config structure..." && [ -f $TA_KEY ] && [ -f $CLIENT_CONF] && [ -f $CA_CRT ] && [ -d $KEYS_DIR ] &&\
-	echo "OK" || echo "Broken config structure. Check $TA_KEY, $CLIENT_CONF, $CA_CRT, $KEYS_DIR"; exit 99
+	echo -n "Check config structure..." && (
+		[ -f $TA_KEY ] || echo "$TA_KEY not found"; exit 99
+		[ -f $CLIENT_CONF ] || echo "$CLIENT_CONF not found"; exit 99
+		[ -f $CA_CRT ] || echo "$CA_CRT not found"; exit 99
+		[ -d $KEYS_DIR ] || echo "$KEYS_DIR not found"; exit 99
+	) &&\
+	echo "OK"
 }
+
 add_client(){
     # check config structure firstly
     check_cfg_structure
-    NAME=$1
+
+	 NAME=$1
     [ -z "$NAME" ] && echo -n "Enter client name and press [ENTER]: "; read NAME || echo "Prepare settings for client $NAME"
     SETTINGS_PACK=${NAME}_openvpn
 
